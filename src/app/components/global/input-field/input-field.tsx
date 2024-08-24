@@ -4,6 +4,7 @@ import React from 'react';
 
 interface InputFieldProps {
     value: string;
+    // @ts-ignore
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

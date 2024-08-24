@@ -1,7 +1,7 @@
 import { ClerkProvider, SignedIn, UserButton } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 // Providers
 import { TrpcProvider } from './providers/trpc-provider/trpc-provider';
 // Styles

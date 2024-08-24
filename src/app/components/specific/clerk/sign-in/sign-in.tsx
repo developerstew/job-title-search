@@ -16,7 +16,7 @@ export const SignIn: React.FC<SignInProps> = ({ isAuthenticated }) => {
     // Router
     const router = useRouter();
     const { signIn } = useSignIn();
-    console.log('signIn', isAuthenticated);
+
     if (isAuthenticated) {
         router.push('/protected/search');
     }

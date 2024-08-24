@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { procedure, router } from '../trpc';
 
 const prisma = new PrismaClient();
-// TODO: ADD relationships to data
 export const jobsRouter = router({
     getJobTitles: procedure.query(async () => prisma.job_titles.findMany()),
     getPopularJobTitles: procedure.query(async () => {
@@ -30,8 +30,7 @@ export const jobsRouter = router({
                 title: row.title,
             }));
         } catch (error) {
-            console.error('Error in getPopularJobTitles:', error);
-            throw error;
+            return NextResponse.json({ error: error.message }, { status: 500 });
         }
     }),
     searchJobTitles: procedure
@@ -55,8 +54,10 @@ export const jobsRouter = router({
                     title: row.title,
                 }));
             } catch (error) {
-                console.error('Error in searchJobTitles:', error);
-                throw error;
+                return NextResponse.json(
+                    { error: error.message },
+                    { status: 500 }
+                );
             }
         }),
 });

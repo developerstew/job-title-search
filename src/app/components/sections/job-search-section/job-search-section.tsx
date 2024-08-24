@@ -26,13 +26,7 @@ export const JobSearchSection: React.FC<JobSearchSectionProps> = ({
 
     const handleNavigaton = () => {
         setLoading(true);
-        try {
-            router.push(`/protected/results?search=${inputValue}`);
-        } catch (error) {
-            console.log(error, 'ERROR');
-        } finally {
-            setLoading(false);
-        }
+        router.push(`/protected/results?search=${inputValue}`);
     };
 
     return (

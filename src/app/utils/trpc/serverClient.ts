@@ -1,11 +1,7 @@
-// @ts-nocheck
 import { appRouter } from '@/server';
-import { httpBatchLink } from '@trpc/client';
+import { createCallerFactory } from '@/server/trpc';
 
-export const serverClient = appRouter.createCaller({
-    links: [
-        httpBatchLink({
-            url: 'http://localhost:3000/api/trpc',
-        }),
-    ],
-});
+const createCaller = createCallerFactory(appRouter);
+
+// @ts-ignore
+export const serverClient = createCaller();

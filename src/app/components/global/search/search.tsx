@@ -11,7 +11,9 @@ interface SearchProps {
     inputValue: string;
     isLoading: boolean;
     query: string;
+    // @ts-ignore
     onInputChange: (inputValue: string) => void;
+    // @ts-ignore
     onSearch: (query: string) => void;
 }
 

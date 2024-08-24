@@ -1,13 +1,18 @@
-// Utils
-import { JobSearchSection } from '@/app/components/sections/job-search-section';
-import { serverClient } from '@/app/utils/trpc/serverClient';
-
 // Compnents
+import { JobSearchSection } from '@/app/components/sections/job-search-section';
+// Utils
+import { serverClient } from '@/app/utils/trpc/serverClient';
 
 const Search = async () => {
     const popularJobTitles = await serverClient.jobs.getPopularJobTitles();
 
-    return <JobSearchSection popularJobTitleData={popularJobTitles} />;
+    return (
+        <JobSearchSection
+            popularJobTitleData={
+                Array.isArray(popularJobTitles) ? popularJobTitles : []
+            }
+        />
+    );
 };
 
 export default Search;

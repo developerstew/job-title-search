@@ -5,33 +5,67 @@
     },
     "plugins": [
         "@typescript-eslint",
+        "react",
         "prettier"
     ],
     "extends": [
         "eslint:recommended",
         "next/core-web-vitals",
-        "plugin:@next/next/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
         "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./tsconfig.json"
     },
     "rules": {
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": "error",
-        "no-multiple-empty-lines": [
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "warn",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/prefer-default-export": "off",
+        "no-console": [
+            "error"
+        ],
+        "no-use-before-define": "off",
+        "react/function-component-definition": "off",
+        "react/jsx-filename-extension": "off",
+        "react/jsx-first-prop-new-line": [
+            "error",
+            "multiline"
+        ],
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            4
+        ],
+        "react/jsx-max-props-per-line": [
             "error",
             {
-                "max": 1
+                "maximum": 2
             }
         ],
-        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "react/jsx-props-no-spreading": "off",
         "react/react-in-jsx-scope": "off",
-        "import/no-duplicates": ["error", { "considerQueryString": true }]
-    }
+        "react/require-default-props": "off",
+        "jsx-quotes": [
+            "error",
+            "prefer-double"
+        ]
+    },
+    "ignorePatterns": [
+        "node_modules/",
+        "dist/",
+        "build/"
+    ]
 }

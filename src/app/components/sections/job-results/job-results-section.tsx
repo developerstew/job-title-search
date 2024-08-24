@@ -55,9 +55,13 @@ export const JobResultsSection: React.FC = () => {
             />
 
             <div className="flex flex-wrap gap-2 pt-8">
-                {jobTitleData?.map(({ title, id }) => (
-                    <CopyTag key={id} copy={title} />
-                ))}
+                {Array.isArray(jobTitleData) ? (
+                    jobTitleData.map(({ title, id }) => (
+                        <CopyTag key={id} copy={title} />
+                    ))
+                ) : (
+                    <p>No results found</p>
+                )}
             </div>
         </section>
     );
