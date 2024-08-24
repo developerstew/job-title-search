@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model job_titles {
+  id                 Int     @id @default(autoincrement())
+  title              String @db.VarChar(255)
+  pdl_count          Int
+  top_related_titles Json
+}
