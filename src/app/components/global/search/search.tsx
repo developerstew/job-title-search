@@ -11,8 +11,8 @@ interface SearchProps {
     inputValue: string;
     isLoading: boolean;
     query: string;
-    onInputChange: (inputValue: string) => void;
-    onSearch: (query: string) => void;
+    onInputChange: () => void;
+    onSearch: () => void;
 }
 
 export const Search: React.FC<SearchProps> = ({

@@ -1,15 +1,8 @@
 // Components
 import { SignIn } from '@/app/components/specific/clerk/sign-in';
 // Utils
-import { serverClient } from '@/app/utils/trpc/serverClient';
-import {
-    ClerkProvider,
-    SignedIn,
-    SignedOut,
-    SignInButton,
-    UserButton,
-    useSignIn,
-} from '@clerk/nextjs';
+// import { serverClient } from '@/app/utils/trpc/serverClient';
+import { SignedOut } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 
 export default async function Home() {
@@ -18,7 +11,7 @@ export default async function Home() {
     // };
     const { userId } = auth();
 
-    const jobTitles = await serverClient.jobs.getJobTitles();
+    // const jobTitles = await serverClient.jobs.getJobTitles();
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
