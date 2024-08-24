@@ -11,8 +11,8 @@ interface SearchProps {
     inputValue: string;
     isLoading: boolean;
     query: string;
-    onInputChange: () => void;
-    onSearch: () => void;
+    onInputChange: (inputValue: string) => void;
+    onSearch: (query: string) => void;
 }
 
 export const Search: React.FC<SearchProps> = ({
@@ -36,7 +36,7 @@ export const Search: React.FC<SearchProps> = ({
     }, [searchQuery, onSearch]);
 
     const handleSetSearchQuery = () => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams.toString());
         params.set(query, inputValue);
         replace(`${pathname}?${params.toString()}`);
     };

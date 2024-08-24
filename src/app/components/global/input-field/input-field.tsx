@@ -4,7 +4,7 @@ import React from 'react';
 
 interface InputFieldProps {
     value: string;
-    onChange: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({ value, onChange }) => (

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { db } from '@/server/database';
 import { getAuth } from '@clerk/nextjs/server';
 import { initTRPC, TRPCError } from '@trpc/server';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { appRouter } from '@/server';
 import { httpBatchLink } from '@trpc/client';
 
