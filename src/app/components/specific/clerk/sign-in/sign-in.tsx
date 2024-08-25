@@ -1,11 +1,12 @@
-'use client';
+// TODO: Create custom sign in, component temporarily just for redirect
+"use client";
 
 // Components
-import { Button } from '@/app/components/global/button';
-import { useSignIn } from '@clerk/nextjs';
+import { useSignIn } from "@clerk/nextjs";
+
 // Router
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useRouter } from "next/navigation";
+import React from "react";
 
 // Types
 interface SignInProps {
@@ -17,13 +18,18 @@ export const SignIn: React.FC<SignInProps> = ({ isAuthenticated }) => {
     const router = useRouter();
     const { signIn } = useSignIn();
 
+    // const handleSignIn = async () => {
+    //     return signIn;
+    // };
+
     if (isAuthenticated) {
-        router.push('/protected/search');
+        router.push("/protected/search");
+    } else {
+        return (
+            <h2 className="text-2xl font-semibold mb-4 text-center">
+                You need to sign in to use this app
+            </h2>
+        );
+        // return <Button onClick={handleSignIn} copy="ss" />;
     }
-
-    const handleSignIn = async () => {
-        await signIn?.create;
-    };
-
-    return <Button onClick={handleSignIn} copy="ss" />;
 };

@@ -1,30 +1,37 @@
+// Clerk
+import { SignInButton, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+
 // Components
-import { SignIn } from '@/app/components/specific/clerk/sign-in';
+import { SignIn } from "./components/specific/clerk/sign-in";
+
 // Utils
-// import { serverClient } from '@/app/utils/trpc/serverClient';
-import { SignedOut } from '@clerk/nextjs';
-import { auth } from '@clerk/nextjs/server';
+import { serverClient } from "./utils/trpc/serverClient";
 
 export default async function Home() {
-    // const handleSignIn = async () => {
-    //     await signIn.redirectToSignIn();
-    // };
+    const popularJobTitles = await serverClient.jobs.getSampleJobTitles();
     const { userId } = auth();
 
-    // const jobTitles = await serverClient.jobs.getJobTitles();
-
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            {/* TODO: Add 404 page */}
-            <SignedOut>
-                <div className="flex flex-col items-center justify-center">
-                    {/* TODO: Figure out custom sign in */}
-                    {/* <SignInButton /> */}
-                    <h1>You need to sign in to use this app</h1>
-                </div>
-            </SignedOut>
+        <article className="flex flex-col items-center justify-center flex-1">
+            <div className="bg-white p-10 flex flex-col rounded shadow-md max-w-lg w-full">
+                <SignIn isAuthenticated={userId !== null} />
 
-            <SignIn isAuthenticated={userId !== null} />
-        </main>
+                <SignedOut>
+                    <SignInButton />
+                </SignedOut>
+            </div>
+
+            <div className="mt-8">
+                <h2 className="text-2xl font-bold mb-4">Popular Job Titles</h2>
+                <ul className="list-disc list-inside">
+                    {popularJobTitles.map((job) => (
+                        <li key={job.id} className="text-lg">
+                            {job.title}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </article>
     );
 }

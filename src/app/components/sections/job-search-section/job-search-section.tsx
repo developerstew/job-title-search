@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 // Components
-import { CopyTag } from '@/app/components/global/copy-tag';
-import { Search } from '@/app/components/global/search/search';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { CopyTag } from "@/app/components/global/copy-tag";
+import { Search } from "@/app/components/global/search/search";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 // Types
 interface JobSearchSectionProps {
@@ -18,7 +18,7 @@ export const JobSearchSection: React.FC<JobSearchSectionProps> = ({
     popularJobTitleData,
 }) => {
     // State
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState("");
     const [isLoading, setLoading] = useState(false);
 
     // Router
@@ -32,7 +32,7 @@ export const JobSearchSection: React.FC<JobSearchSectionProps> = ({
     return (
         <section className="flex flex-col items-center justify-center gap-10">
             <div>
-                <h2 className="font-semi-bold text-md ml-5">
+                <h2 className="font-semi-bold text-md mt-4 ml-5">
                     Popular Job Titles
                 </h2>
                 <div className="flex flex-wrap gap-2 pt-2">

@@ -1,10 +1,5 @@
-// Utils
-
-// Compnents
-// import { CopyTag } from '@/app/components/global/copy-tag';
-import { JobResultsSection } from '@/app/components/sections/job-results/job-results-section';
-
-// import { serverClient } from '@/app/utils/trpc/serverClient';
+// Components
+import { JobResultsSection } from "../../components/sections/job-results/job-results-section";
 
 const Results = async () => (
     <div className="flex flex-col items-center justify-center">

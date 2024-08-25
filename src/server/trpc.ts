@@ -1,10 +1,11 @@
-import { initTRPC, TRPCError } from '@trpc/server';
-import superjson from 'superjson';
-import { ZodError } from 'zod';
+import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
 
-import { createTRPCContext } from '@/server/context';
+// Types
+import { type Context } from "./context";
 
-const t = initTRPC.context<typeof createTRPCContext>().create({
+const t = initTRPC.context<Context>().create({
     transformer: superjson,
     errorFormatter({ shape, error }) {
         return {
@@ -20,18 +21,19 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
     },
 });
 
-export const router = t.router;
-
-export const createCallerFactory = t.createCallerFactory;
-
-export const procedure = t.procedure;
-
-const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-    if (!ctx.userId) {
-        throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-
-    return next({ ctx: { userId: ctx.userId } });
+const isAuthed = t.middleware(({ next, ctx }) => {
+    console.log("CTX Check", ctx);
+    // if (!ctx?.auth.userId) {
+    //   throw new TRPCError({ code: 'UNAUTHORIZED' })
+    // }
+    return next({
+        ctx: {
+            auth: ctx.auth,
+        },
+    });
 });
 
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+export const createCallerFactory = t.createCallerFactory;
+export const router = t.router;
+export const procedure = t.procedure;
+export const protectedProcedure = t.procedure.use(isAuthed);

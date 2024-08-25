@@ -1,19 +1,17 @@
-'use client';
+"use client";
 
 // Components
-import { Button } from '@/app/components/global/button';
-import { InputField } from '@/app/components/global/input-field';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { Button } from "@/app/components/global/button";
+import { InputField } from "@/app/components/global/input-field";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
 
 // Types
 interface SearchProps {
     inputValue: string;
     isLoading: boolean;
     query: string;
-    // @ts-ignore
     onInputChange: (inputValue: string) => void;
-    // @ts-ignore
     onSearch: (query: string) => void;
 }
 

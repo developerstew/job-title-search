@@ -1,15 +1,16 @@
-import { db } from '@/server/database';
-import { getAuth } from '@clerk/nextjs/server';
-import { type NextRequest } from 'next/server';
+import { db } from "@/server/database";
+import { getAuth } from "@clerk/nextjs/server";
+import * as trpc from "@trpc/server";
+import * as trpcNext from "@trpc/server/adapters/next";
 
-// type AuthObject = ReturnType<typeof getAuth>;
-
-export const createTRPCContext = async (req: NextRequest) => {
-    const auth = getAuth(req);
+export const createContext = async (
+    opts: trpcNext.CreateNextContextOptions
+) => {
+    const auth = getAuth(opts.req);
     return {
         db,
-        userId: auth.userId,
-        headers: req.headers,
         auth,
     };
 };
+
+export type Context = trpc.inferAsyncReturnType<typeof createContext>;

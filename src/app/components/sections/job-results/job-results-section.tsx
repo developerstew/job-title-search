@@ -1,32 +1,18 @@
-'use client';
+"use client";
+
+import { NextResponse } from "next/server";
+import React, { useEffect, useState } from "react";
 
 // Components
-import { CopyTag } from '@/app/components/global/copy-tag';
-import { Search } from '@/app/components/global/search/search';
-// Utils
-import { client } from '@/app/utils/trpc/client';
-import { NextResponse } from 'next/server';
-import React, { useEffect, useState } from 'react';
+import { CopyTag } from "@/app/components/global/copy-tag";
+import { Search } from "@/app/components/global/search/search";
 
 export const JobResultsSection: React.FC = () => {
     // State
-    // TODO: See if we need both states here
-    const [inputValue, setInputValue] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
-
-    // TRPC
-    const {
-        data: jobTitleData,
-        isLoading,
-        refetch,
-    } = client.jobs.searchJobTitles.useQuery(
-        {
-            query: searchQuery,
-        },
-        {
-            enabled: false,
-        }
-    );
+    const [inputValue, setInputValue] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [jobTitleData, setJobTitleData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSearch = async (searchQuery: string) => {
         try {
@@ -39,10 +25,23 @@ export const JobResultsSection: React.FC = () => {
     };
 
     useEffect(() => {
-        if (searchQuery) {
-            refetch();
-        }
-    }, [searchQuery, refetch]);
+        const fetchJobTitles = async () => {
+            if (searchQuery) {
+                setIsLoading(true);
+                try {
+                    const response = await fetch(`/api/trpc/jobs.searchJobTitles?query=${searchQuery}`);
+                    const data = await response.json();
+                    setJobTitleData(data);
+                } catch (error) {
+                    console.error("Error fetching job titles:", error);
+                } finally {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        fetchJobTitles();
+    }, [searchQuery]);
 
     return (
         <section>
@@ -55,7 +54,7 @@ export const JobResultsSection: React.FC = () => {
             />
 
             <div className="flex flex-wrap gap-2 pt-8">
-                {Array.isArray(jobTitleData) ? (
+                {Array.isArray(jobTitleData) && jobTitleData.length > 0 ? (
                     jobTitleData.map(({ title, id }) => (
                         <CopyTag key={id} copy={title} />
                     ))

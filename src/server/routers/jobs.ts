@@ -1,12 +1,11 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
-import { z } from 'zod';
-import { procedure, router } from '../trpc';
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
+import { z } from "zod";
+import { procedure, protectedProcedure, router } from "../trpc";
 
 const prisma = new PrismaClient();
 export const jobsRouter = router({
-    getJobTitles: procedure.query(async () => prisma.job_titles.findMany()),
-    getPopularJobTitles: procedure.query(async () => {
+    getPopularJobTitles: protectedProcedure.query(async ({ ctx }) => {
         try {
             const result = await prisma.$queryRaw<
                 {
@@ -30,10 +29,10 @@ export const jobsRouter = router({
                 title: row.title,
             }));
         } catch (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
+            throw NextResponse.json({ error: error.message }, { status: 500 });
         }
     }),
-    searchJobTitles: procedure
+    searchJobTitles: protectedProcedure
         .input(
             z.object({
                 query: z.string(),
@@ -54,10 +53,24 @@ export const jobsRouter = router({
                     title: row.title,
                 }));
             } catch (error) {
-                return NextResponse.json(
+                throw NextResponse.json(
                     { error: error.message },
                     { status: 500 }
                 );
             }
         }),
+    getSampleJobTitles: procedure.query(async ({ ctx }) => {
+        try {
+            console.log("CTX In job titles", ctx);
+            const result = await prisma.job_titles.findMany({
+                take: 5,
+            });
+            return result.map((row) => ({
+                id: row.id,
+                title: row.title,
+            }));
+        } catch (error) {
+            throw NextResponse.json({ error: error.message }, { status: 500 });
+        }
+    }),
 });
