@@ -45,6 +45,7 @@ export const Search: React.FC<SearchProps> = ({
         <div className="flex items-center justify-center">
             <InputField
                 value={inputValue}
+                onEnterPress={handleSetSearchQuery}
                 onChange={(e) => onInputChange(e.target.value)}
             />
 

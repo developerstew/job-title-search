@@ -1,3 +1,6 @@
+import { createContext } from "@/server/context";
+import { appRouter } from "@/server/routers/_app";
+
 // Trpc
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
@@ -9,9 +12,6 @@ dotenv.config();
 const env = {
     NODE_ENV: process.env.NODE_ENV,
 };
-
-import { appRouter } from "@/server";
-import { createContext } from "@/server/context";
 
 const handler = (req: NextRequest) =>
     fetchRequestHandler({

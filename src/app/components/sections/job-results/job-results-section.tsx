@@ -1,50 +1,56 @@
 "use client";
 
 import { NextResponse } from "next/server";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 // Components
-import { CopyTag } from "@/app/components/global/copy-tag";
+import { SearchResultItem } from "@/app/components/global/search-result-item";
 import { Search } from "@/app/components/global/search/search";
+
+interface JobTitle {
+    title: string;
+    id: string;
+}
 
 export const JobResultsSection: React.FC = () => {
     // State
     const [inputValue, setInputValue] = useState("");
+    const [jobTitleData, setJobTitleData] = useState<JobTitle[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
-    const [jobTitleData, setJobTitleData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSearch = async (searchQuery: string) => {
-        try {
+    const handleSearch = useMemo(() => {
+        return (searchQuery: string) => {
             setSearchQuery(searchQuery);
-        } catch (error) {
-            NextResponse.json({
-                error,
-            });
+            setIsLoading(true);
+        };
+    }, [searchQuery]);
+
+    const fetchJobTitles = async (searchQuery: string) => {
+        if (searchQuery) {
+            try {
+                const response = await fetch(
+                    `/api/jobs/get-by-title/${searchQuery}`
+                );
+                const data = await response.json();
+                setJobTitleData(data);
+            } catch (error) {
+                NextResponse.json({ error });
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
     useEffect(() => {
-        const fetchJobTitles = async () => {
-            if (searchQuery) {
-                setIsLoading(true);
-                try {
-                    const response = await fetch(
-                        `/api/jobs/get-by-title/${searchQuery}`
-                    );
-
-                    const data = await response.json();
-                    setJobTitleData(data);
-                } catch (error) {
-                    return NextResponse.json({ error });
-                } finally {
-                    setIsLoading(false);
-                }
-            }
-        };
-
-        fetchJobTitles();
+        fetchJobTitles(searchQuery);
     }, [searchQuery]);
+
+    const filteredJobTitles = useMemo(() => {
+        return jobTitleData.filter((job) =>
+            job.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }, [jobTitleData, searchQuery]);
 
     return (
         <section>
@@ -56,10 +62,16 @@ export const JobResultsSection: React.FC = () => {
                 onSearch={handleSearch}
             />
 
-            <div className="flex flex-wrap gap-2 pt-8">
-                {jobTitleData.map(({ title, id }) => (
-                    <CopyTag key={id} copy={title} />
-                ))}
+            {/* TODO: Add pagination */}
+            <div className="flex flex-col gap-2 pt-8 pb-4 w-full">
+                {!isLoading &&
+                    (filteredJobTitles.length === 0 ? (
+                        <p className="text-red-500">No data found</p>
+                    ) : (
+                        filteredJobTitles.map(({ title, id }) => (
+                            <SearchResultItem key={id} title={title} />
+                        ))
+                    ))}
             </div>
         </section>
     );

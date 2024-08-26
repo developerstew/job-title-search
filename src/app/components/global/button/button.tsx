@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
     copy: string;
@@ -18,6 +18,6 @@ export const Button: React.FC<ButtonProps> = ({
         type="button"
         onClick={onClick}
     >
-        {isLoading ? 'Loading...' : copy}
+        {isLoading ? "Loading..." : copy}
     </button>
 );

@@ -9,7 +9,7 @@ import { SignIn } from "@/app/components/specific/clerk/sign-in";
 import { serverClient } from "@/app/utils/trpc/serverClient";
 
 export default async function Home() {
-    const popularJobTitles = await serverClient.getSampleJobTitles();
+    const popularJobTitles = await serverClient.jobs.getSampleJobTitles();
     const { userId } = auth();
 
     return (

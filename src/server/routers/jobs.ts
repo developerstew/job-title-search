@@ -31,7 +31,7 @@ export const jobsRouter = router({
                 title: row.title,
             }));
         } catch (error) {
-            throw NextResponse.json({ error: error.message }, { status: 500 });
+            throw NextResponse.json({ error }, { status: 500 });
         }
     }),
     searchJobTitles: protectedProcedure
@@ -56,10 +56,7 @@ export const jobsRouter = router({
                     title: row.title,
                 }));
             } catch (error) {
-                throw NextResponse.json(
-                    { error: error.message },
-                    { status: 500 }
-                );
+                throw NextResponse.json({ error }, { status: 500 });
             }
         }),
     getSampleJobTitles: procedure.query(async () => {
@@ -72,7 +69,7 @@ export const jobsRouter = router({
                 title: row.title,
             }));
         } catch (error) {
-            throw NextResponse.json({ error: error.message }, { status: 500 });
+            throw NextResponse.json({ error }, { status: 500 });
         }
     }),
 });
