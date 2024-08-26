@@ -1,16 +1,11 @@
-import { db } from "@/server/database";
+// Clerk
 import { getAuth } from "@clerk/nextjs/server";
-import * as trpc from "@trpc/server";
-import * as trpcNext from "@trpc/server/adapters/next";
 
-export const createContext = async (
-    opts: trpcNext.CreateNextContextOptions
-) => {
-    const auth = getAuth(opts.req);
-    return {
-        db,
-        auth,
-    };
+// TRPC
+import { CreateNextContextOptions } from "@trpc/server/adapters/next";
+
+export const createContext = async (opts: CreateNextContextOptions) => {
+    return { auth: getAuth(opts.req) };
 };
 
-export type Context = trpc.inferAsyncReturnType<typeof createContext>;
+export type Context = typeof createContext;

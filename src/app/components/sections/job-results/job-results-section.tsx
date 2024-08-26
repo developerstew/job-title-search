@@ -29,11 +29,14 @@ export const JobResultsSection: React.FC = () => {
             if (searchQuery) {
                 setIsLoading(true);
                 try {
-                    const response = await fetch(`/api/trpc/jobs.searchJobTitles?query=${searchQuery}`);
+                    const response = await fetch(
+                        `/api/jobs/get-by-title/${searchQuery}`
+                    );
+
                     const data = await response.json();
                     setJobTitleData(data);
                 } catch (error) {
-                    console.error("Error fetching job titles:", error);
+                    return NextResponse.json({ error });
                 } finally {
                     setIsLoading(false);
                 }
@@ -54,13 +57,9 @@ export const JobResultsSection: React.FC = () => {
             />
 
             <div className="flex flex-wrap gap-2 pt-8">
-                {Array.isArray(jobTitleData) && jobTitleData.length > 0 ? (
-                    jobTitleData.map(({ title, id }) => (
-                        <CopyTag key={id} copy={title} />
-                    ))
-                ) : (
-                    <p>No results found</p>
-                )}
+                {jobTitleData.map(({ title, id }) => (
+                    <CopyTag key={id} copy={title} />
+                ))}
             </div>
         </section>
     );

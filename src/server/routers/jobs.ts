@@ -1,11 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+
+// Trpc
 import { procedure, protectedProcedure, router } from "../trpc";
 
 const prisma = new PrismaClient();
 export const jobsRouter = router({
-    getPopularJobTitles: protectedProcedure.query(async ({ ctx }) => {
+    getPopularJobTitles: protectedProcedure.query(async () => {
         try {
             const result = await prisma.$queryRaw<
                 {
@@ -40,6 +42,7 @@ export const jobsRouter = router({
         )
         .query(async ({ input }) => {
             const { query } = input;
+
             try {
                 const result = await prisma.job_titles.findMany({
                     where: {
@@ -59,9 +62,8 @@ export const jobsRouter = router({
                 );
             }
         }),
-    getSampleJobTitles: procedure.query(async ({ ctx }) => {
+    getSampleJobTitles: procedure.query(async () => {
         try {
-            console.log("CTX In job titles", ctx);
             const result = await prisma.job_titles.findMany({
                 take: 5,
             });

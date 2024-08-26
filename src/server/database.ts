@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import dotenv from 'dotenv';
+import { PrismaClient } from "@prisma/client";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -16,9 +16,9 @@ export const db =
     globalForPrisma.prisma ??
     new PrismaClient({
         log:
-            env.NODE_ENV === 'development'
-                ? ['query', 'error', 'warn']
-                : ['error'],
+            env.NODE_ENV === "development"
+                ? ["query", "error", "warn"]
+                : ["error"],
     });
 
-if (env.NODE_ENV !== 'production') globalForPrisma.prisma = db;
+if (env.NODE_ENV !== "production") globalForPrisma.prisma = db;

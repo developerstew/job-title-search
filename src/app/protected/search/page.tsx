@@ -1,5 +1,6 @@
 // Compnents
 import { JobSearchSection } from "@/app/components/sections/job-search-section";
+
 // Utils
 import { serverClient } from "@/app/utils/trpc/serverClient";
 

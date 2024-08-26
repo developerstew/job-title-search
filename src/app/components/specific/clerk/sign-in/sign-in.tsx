@@ -2,7 +2,6 @@
 "use client";
 
 // Components
-import { useSignIn } from "@clerk/nextjs";
 
 // Router
 import { useRouter } from "next/navigation";
@@ -16,7 +15,6 @@ interface SignInProps {
 export const SignIn: React.FC<SignInProps> = ({ isAuthenticated }) => {
     // Router
     const router = useRouter();
-    const { signIn } = useSignIn();
 
     // const handleSignIn = async () => {
     //     return signIn;

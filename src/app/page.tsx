@@ -3,13 +3,13 @@ import { SignInButton, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
 // Components
-import { SignIn } from "./components/specific/clerk/sign-in";
+import { SignIn } from "@/app/components/specific/clerk/sign-in";
 
 // Utils
-import { serverClient } from "./utils/trpc/serverClient";
+import { serverClient } from "@/app/utils/trpc/serverClient";
 
 export default async function Home() {
-    const popularJobTitles = await serverClient.jobs.getSampleJobTitles();
+    const popularJobTitles = await serverClient.getSampleJobTitles();
     const { userId } = auth();
 
     return (

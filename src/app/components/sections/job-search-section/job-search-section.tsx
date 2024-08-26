@@ -1,10 +1,11 @@
 "use client";
 
+import React, { useState } from "react";
+
 // Components
 import { CopyTag } from "@/app/components/global/copy-tag";
 import { Search } from "@/app/components/global/search/search";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
 
 // Types
 interface JobSearchSectionProps {

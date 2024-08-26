@@ -1,9 +1,12 @@
-// Routers
-import { jobsRouter } from './routers/jobs';
-import { router } from './trpc';
+// Database
 
-export const appRouter = router({
-    jobs: jobsRouter,
-});
+import { createCallerFactory, mergeRouters } from "./trpc";
+
+// Routers
+import { jobsRouter } from "./routers/jobs";
+
+export const appRouter = mergeRouters(jobsRouter);
+
+export const createCaller = createCallerFactory(appRouter);
 
 export type AppRouter = typeof appRouter;

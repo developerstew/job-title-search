@@ -1,6 +1,8 @@
-import * as trpcNext from "@trpc/server/adapters/next";
+// Trpc
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import dotenv from "dotenv";
+import { type NextRequest } from "next/server";
 
 dotenv.config();
 
@@ -11,16 +13,22 @@ const env = {
 import { appRouter } from "@/server";
 import { createContext } from "@/server/context";
 
-export default trpcNext.createNextApiHandler({
-    router: appRouter,
-    createContext: createContext,
-    onError:
-        env.NODE_ENV === "development"
-            ? ({ path, error }) => {
-                  // eslint-disable-next-line no-console
-                  console.error(
-                      `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
-                  );
-              }
-            : undefined,
-});
+const handler = (req: NextRequest) =>
+    fetchRequestHandler({
+        endpoint: "/api/trpc",
+        req,
+        router: appRouter,
+        // @ts-ignore
+        createContext,
+        onError:
+            env.NODE_ENV === "development"
+                ? ({ path, error }) => {
+                      // eslint-disable-next-line no-console
+                      console.error(
+                          `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
+                      );
+                  }
+                : undefined,
+    });
+
+export { handler as GET, handler as POST };
