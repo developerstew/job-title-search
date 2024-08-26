@@ -1,1 +1,1 @@
-export { CopyTag } from './copy-tag';
+export { CopyTag } from "./copy-tag";
