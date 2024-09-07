@@ -1,7 +1,8 @@
 import { initTRPC } from "@trpc/server";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { TRPCError } from "@trpc/server";
 import { type Context } from "./context";
+import { ZodError } from "zod";
+import superjson from "superjson";
 
 const t = initTRPC.context<Context>().create({
     transformer: superjson,
@@ -19,21 +20,25 @@ const t = initTRPC.context<Context>().create({
     },
 });
 
-// const isAuthed = t.middleware(({ next, ctx }) => {
-//     if (!ctx.auth.userId) {
-//       throw new TRPCError({ code: 'UNAUTHORIZED' })
-//     }
-//     return next({
-//       ctx: {
-//         auth: ctx.auth,
-//       },
-//     })
-//   })
+const isAuthed = t.middleware(async ({ next, ctx }) => {
+    const authData = await ctx.auth;
+
+    if (!authData.userId) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+
+    return next({
+        ctx: {
+            ...ctx,
+            auth: authData,
+        },
+    });
+});
 
 export const { mergeRouters, procedure, router } = t;
 
 export const createCallerFactory = t.createCallerFactory;
 export const publicProcedure = t.procedure;
 // TODO: Fix protected backend auth
-export const protectedProcedure = t.procedure;
-// export const protectedProcedure = t.procedure.use(isAuthed);
+// export const protectedProcedure = t.procedure;
+export const protectedProcedure = t.procedure.use(isAuthed);

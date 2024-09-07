@@ -1,5 +1,5 @@
-import { createContext } from "@/server/context";
-import { appRouter } from "@/server/routers/_app";
+import { createContext } from "@/app/api/trpc/context";
+import { appRouter } from "@/app/api/trpc/routers/_app";
 
 // Trpc
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
@@ -18,7 +18,6 @@ const handler = (req: NextRequest) =>
         endpoint: "/api/trpc",
         req,
         router: appRouter,
-        // @ts-ignore
         createContext,
         onError:
             env.NODE_ENV === "development"

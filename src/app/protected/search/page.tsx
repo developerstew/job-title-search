@@ -2,10 +2,10 @@
 import { JobSearchSection } from "@/app/components/sections/job-search-section";
 
 // Utils
-import { serverClient } from "@/app/utils/trpc/serverClient";
+import { helpers } from "@/app/utils/trpc/serverClient";
 
 const Search = async () => {
-    const popularJobTitles = await serverClient.jobs.getPopularJobTitles();
+    const popularJobTitles = await helpers.jobs.getPopularJobTitles.fetch();
 
     return <JobSearchSection popularJobTitleData={popularJobTitles} />;
 };

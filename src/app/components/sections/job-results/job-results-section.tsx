@@ -20,18 +20,16 @@ export const JobResultsSection: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleSearch = useMemo(() => {
-        return (searchQuery: string) => {
-            setSearchQuery(searchQuery);
+        return (query: string) => {
+            setSearchQuery(query);
             setIsLoading(true);
         };
-    }, [searchQuery]);
+    }, []);
 
-    const fetchJobTitles = async (searchQuery: string) => {
-        if (searchQuery) {
+    const fetchJobTitles = async (query: string) => {
+        if (query) {
             try {
-                const response = await fetch(
-                    `/api/jobs/get-by-title/${searchQuery}`
-                );
+                const response = await fetch(`/api/jobs/get-by-title/${query}`);
                 const data = await response.json();
                 setJobTitleData(data);
             } catch (error) {

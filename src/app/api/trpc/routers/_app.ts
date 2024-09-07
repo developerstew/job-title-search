@@ -1,4 +1,3 @@
-import * as trpcNext from "@trpc/server/adapters/next";
 import { createCallerFactory, publicProcedure, router } from "../trpc";
 
 // Context
@@ -14,8 +13,8 @@ export const appRouter = router({
 
 export const createCaller = createCallerFactory(appRouter);
 
-export const caller = async (opts: trpcNext.CreateNextContextOptions) => {
-    const ctx = await createContext(opts);
+export const caller = async () => {
+    const ctx = await createContext();
     return createCaller(ctx);
 };
 
