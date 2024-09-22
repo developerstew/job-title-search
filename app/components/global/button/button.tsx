@@ -2,6 +2,7 @@
 
 import React from "react";
 
+// Types
 interface ButtonProps {
     copy: string;
     isLoading?: boolean;

@@ -2,6 +2,7 @@
 
 import React from "react";
 
+// Types
 interface CopyTagProps {
     copy: string;
 }

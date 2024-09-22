@@ -8,8 +8,7 @@ export async function createContextInner() {
         auth: await auth(),
         db,
     };
-    console.log("AUTHDATAGG Start");
-    console.log(authData, "AUTHDATAGG");
+
     return authData;
 }
 

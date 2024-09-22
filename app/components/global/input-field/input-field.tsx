@@ -2,6 +2,7 @@
 
 import React from "react";
 
+// Types
 interface InputFieldProps {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
