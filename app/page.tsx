@@ -6,10 +6,11 @@ import { auth } from "@clerk/nextjs/server";
 import { SignIn } from "./components/specific/clerk/sign-in";
 
 // Utils
-import { serverClient } from "./utils/trpc/serverClient";
+import { clientHelpers } from "./utils/trpc/serverClient";
 
 export default async function Home() {
-    const popularJobTitles = await serverClient.jobs.getSampleJobTitles();
+    const client = await clientHelpers();
+    const popularJobTitles = await client.jobs.getSampleJobTitles.fetch();
     const { userId } = auth();
 
     return (
