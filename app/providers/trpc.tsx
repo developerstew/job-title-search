@@ -7,7 +7,11 @@ import superjson from "superjson";
 // Utils
 import { client as trpc } from "@/app/utils/trpc/client";
 
-export default function trpcProvider({ children }: { children: React.ReactNode }) {
+export default function TrpcProvider({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     const [queryClient] = useState(() => new QueryClient({}));
     const [trpcClient] = useState(() =>
         trpc.createClient({

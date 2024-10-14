@@ -1,9 +1,6 @@
 "use client";
 
-import React, { 
-    useMemo, 
-    useState,
-} from "react";
+import React, { useMemo, useState } from "react";
 
 // Components
 import { SearchResultItem } from "../../global/search-result-item";
@@ -23,12 +20,13 @@ export const JobResultsSection: React.FC = () => {
         };
     }, []);
 
-    const { data: jobTitleData = [], isLoading } = client.jobs.searchJobTitles.useQuery(
-        { query: searchQuery },
-        {
-            enabled: !!searchQuery,
-        }
-    );
+    const { data: jobTitleData = [], isLoading } =
+        client.jobs.searchJobTitles.useQuery(
+            { query: searchQuery },
+            {
+                enabled: !!searchQuery,
+            }
+        );
 
     const filteredJobTitles = useMemo(() => {
         return jobTitleData.filter((job) =>
@@ -48,7 +46,8 @@ export const JobResultsSection: React.FC = () => {
 
             {/* TODO: Add pagination */}
             <div className="flex flex-col gap-2 pt-8 pb-4 w-full">
-                {!isLoading && searchQuery &&
+                {!isLoading &&
+                    searchQuery &&
                     (filteredJobTitles.length === 0 ? (
                         <p className="text-red-500">No data found</p>
                     ) : (
