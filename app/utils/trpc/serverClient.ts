@@ -17,8 +17,10 @@ export const serverClient = appRouter.createCaller({
     ],
 });
 
-export const helpers = createServerSideHelpers({
-    router: appRouter,
-    ctx: createContext(),
-    transformer: superjson,
-});
+export const clientHelpers = async () => {
+    return createServerSideHelpers({
+        router: appRouter,
+        ctx: await createContext(),
+        transformer: superjson,
+    });
+};

@@ -2,8 +2,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// // AWs
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
+
+// Supabase
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -13,3 +20,4 @@ model job_titles {
   pdl_count          Int
   top_related_titles Json
 }
+
