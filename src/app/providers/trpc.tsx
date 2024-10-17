@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import superjson from "superjson";
 
 // Utils
-import { client as trpc } from "@/app/utils/trpc/client";
+import { client as trpc } from "@/src/app/utils/trpc/client";
 
 export default function TrpcProvider({
     children,

@@ -1,5 +1,5 @@
 // Clerk
-import { SignInButton, SignedOut } from "@clerk/nextjs";
+import { SignedOut, SignUpButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 
 // Components
@@ -19,7 +19,7 @@ export default async function Home() {
                 <SignIn isAuthenticated={userId !== null} />
 
                 <SignedOut>
-                    <SignInButton />
+                    <SignUpButton mode="modal" />
                 </SignedOut>
             </div>
 
