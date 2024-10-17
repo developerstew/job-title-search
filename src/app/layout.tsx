@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
 
 // Trpc
-import Provider from "@/app/providers/trpc";
+import Provider from "@/src/app/providers/trpc";
 
 // Styles
 import "./globals.css";

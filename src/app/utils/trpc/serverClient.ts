@@ -1,6 +1,6 @@
 "use server";
 
-import { appRouter } from "@/app/api/trpc/routers/_app";
+import { appRouter } from "@/src/app/api/trpc/routers/_app";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import superjson from "superjson";
 import { createContext } from "../../api/trpc/context";
