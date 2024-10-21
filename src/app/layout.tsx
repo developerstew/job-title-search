@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Provider>
                 <html lang="en" className="h-full">
                     <body
-                        className={`flex flex-col min-h-screen ${inter.className}`}
+                        className={`flex min-h-screen flex-col ${inter.className}`}
                     >
-                        <header className="w-full flex justify-between items-center py-10 bg-blue-600 text-white px-10">
+                        <header className="flex w-full items-center justify-between bg-blue-600 px-10 py-10 text-white">
                             <div className="flex-grow text-center">
                                 <h1 className="text-4xl font-bold">
                                     Welcome to Our App
@@ -42,11 +42,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                             </SignedIn>
                         </header>
 
-                        <main className="flex-grow pt-10 bg-gray-100 w-full">
+                        <main className="w-full flex-grow bg-gray-100 pt-10">
                             {children}
                         </main>
 
-                        <footer className="w-full text-center py-4 bg-blue-600 text-white mt-auto">
+                        <footer className="mt-auto w-full bg-blue-600 py-4 text-center text-white">
                             <p>&copy; 2023 Our App. All rights reserved.</p>
                         </footer>
                     </body>

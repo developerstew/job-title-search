@@ -45,7 +45,7 @@ export const JobResultsSection: React.FC = () => {
             />
 
             {/* TODO: Add pagination */}
-            <div className="flex flex-col gap-2 pt-8 pb-4 w-full">
+            <div className="flex w-full flex-col gap-2 pb-4 pt-8">
                 {!isLoading &&
                     searchQuery &&
                     (filteredJobTitles.length === 0 ? (

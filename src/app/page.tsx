@@ -17,16 +17,16 @@ export default async function Home() {
     }
 
     return (
-        <article className="flex flex-col items-center justify-center flex-1">
-            <div className="bg-white p-10 flex flex-col rounded shadow-md max-w-lg w-full">
+        <article className="flex flex-1 flex-col items-center justify-center">
+            <div className="flex w-full max-w-lg flex-col rounded bg-white p-10 shadow-md">
                 <SignedOut>
                     <SignUpButton mode="modal" />
                 </SignedOut>
             </div>
 
             <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4">Popular Job Titles</h2>
-                <ul className="list-disc list-inside">
+                <h2 className="mb-4 text-2xl font-bold">Popular Job Titles</h2>
+                <ul className="list-inside list-disc">
                     {popularJobTitles.map((job) => (
                         <li key={job.id} className="text-lg">
                             {job.title}

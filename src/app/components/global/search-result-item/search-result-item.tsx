@@ -11,8 +11,8 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
 }) => {
     return (
         <div className="w-screen px-10">
-            <div className="p-4 border-b border-gray-200">
-                <h2 className="text-blue-600 text-xl hover:underline cursor-pointer">
+            <div className="border-b border-gray-200 p-4">
+                <h2 className="cursor-pointer text-xl text-blue-600 hover:underline">
                     {title}
                 </h2>
                 {/* TODO: Add more data here like related titles */}

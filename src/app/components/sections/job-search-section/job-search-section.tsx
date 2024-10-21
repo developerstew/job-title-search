@@ -33,7 +33,7 @@ export const JobSearchSection: React.FC<JobSearchSectionProps> = ({
     return (
         <section className="flex flex-col items-center justify-center gap-10">
             <div>
-                <h2 className="font-semi-bold text-md mt-4 ml-5">
+                <h2 className="font-semi-bold text-md ml-5 mt-4">
                     Popular Job Titles
                 </h2>
                 <div className="flex flex-wrap gap-2 pt-2">
