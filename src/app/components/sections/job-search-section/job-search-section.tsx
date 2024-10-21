@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 
 // Components
+import { CopyTag } from "@/src/app/components/global/copy-tag";
+import { Search } from "@/src/app/components/global/search";
 import { useRouter } from "next/navigation";
-import { CopyTag } from "../../global/copy-tag";
-import { Search } from "../../global/search/search";
 
 // Types
 interface JobSearchSectionProps {

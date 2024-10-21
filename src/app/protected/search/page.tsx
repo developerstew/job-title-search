@@ -1,8 +1,8 @@
 // Compnents
-import { JobSearchSection } from "../../components/sections/job-search-section";
+import { JobSearchSection } from "@/src/app/components/sections/job-search-section/job-search-section";
 
 // Utils
-import { clientHelpers } from "../../utils/trpc/serverClient";
+import { clientHelpers } from "@/src/app/utils/trpc/serverClient";
 
 const Search = async () => {
     const client = await clientHelpers();

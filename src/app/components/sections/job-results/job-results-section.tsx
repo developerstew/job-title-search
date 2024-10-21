@@ -3,11 +3,11 @@
 import React, { useMemo, useState } from "react";
 
 // Components
-import { SearchResultItem } from "../../global/search-result-item";
-import { Search } from "../../global/search/search";
+import { SearchResultItem } from "@/src/app/components/global/search-result-item/search-result-item";
+import { Search } from "@/src/app/components/global/search/search";
 
 // Utils
-import { client } from "../../../utils/trpc/client";
+import { client } from "@/src/app/utils/trpc/client";
 
 export const JobResultsSection: React.FC = () => {
     // State
